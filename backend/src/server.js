@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors" 
 import dotenv from "dotenv";
+import path from "path"
 
 import notesRoutes from "../src/routes/notesRoutes.js"
 import { connectDB } from "./config/db.js";
@@ -14,6 +15,7 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5001; 
+const __dirname = path.resolve()
 
 
 
@@ -33,6 +35,7 @@ app.use((req, res, next) => {
 })
 
 app.use("/api/notes", notesRoutes); 
+app.use(express.static(path.join()))
 
 
 connectDB().then(() => {
